@@ -53,8 +53,10 @@ end
 
 :ssl.start()
 
-CustomDTLSServer.run() |> dbg()
+{:ok, socket} = CustomDTLSServer.run()
+:ok = :ssl.send(socket, "hello")
 
 receive do
   :ok -> :ok
+  other -> dbg(other)
 end

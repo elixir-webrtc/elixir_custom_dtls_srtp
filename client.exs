@@ -48,8 +48,9 @@ defmodule CustomUDPTransport do
 end
 
 :ssl.start()
-CustomDTLSClient.run() |> dbg()
+{:ok, socket} = CustomDTLSClient.run()
 
 receive do
   :ok -> :ok
+  other -> dbg(other)
 end
