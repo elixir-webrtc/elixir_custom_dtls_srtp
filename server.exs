@@ -7,7 +7,7 @@ defmodule CustomDTLSServer do
       certs_keys: [
         %{certfile: "cert.pem", keyfile: "key.pem"}
       ],
-      use_srtp: %{protection_profiles: [<<0, 2>>, <<0, 5>>]}
+      use_srtp: %{protection_profiles: [<<0, 5>>]}
     ]
 
     # {:ok, socket} = :gen_udp.open(4444) # can't use plain UDP socket
