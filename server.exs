@@ -1,7 +1,5 @@
 defmodule CustomDTLSServer do
   def run() do
-    {:ok, socket} = :gen_udp.open(0)
-
     options = [
       cb_info: {CustomUDPTransport, :udp, :udp_closed, :udp_error},
       log_level: :debug,
@@ -11,11 +9,17 @@ defmodule CustomDTLSServer do
       ]
     ]
 
-    :ssl.handshake(socket, options, :infinity) |> dbg()
+    {:ok, socket} = :ssl.listen(4001, options)
+    {:ok, socket} = :ssl.transport_accept(socket)
+    :ssl.handshake(socket)
   end
 end
 
 defmodule CustomUDPTransport do
+  def open(port, opts) do
+    :gen_udp.open(port, opts)
+  end
+
   def controlling_process(socket, pid) do
     :gen_udp.controlling_process(socket, pid)
   end
