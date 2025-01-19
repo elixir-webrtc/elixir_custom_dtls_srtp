@@ -9,7 +9,7 @@ defmodule CustomDTLSServer do
       ]
     ]
 
-    {:ok, socket} = :ssl.listen(4001, options)
+    {:ok, socket} = :ssl.listen(4444, options)
     {:ok, socket} = :ssl.transport_accept(socket)
     :ssl.handshake(socket)
   end

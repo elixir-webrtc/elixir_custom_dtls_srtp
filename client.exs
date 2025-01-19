@@ -8,7 +8,7 @@ defmodule CustomDTLSClient do
       cb_info: {CustomUDPTransport, :udp, :udp_closed, :udp_error}
     ]
 
-    :ssl.connect({127, 0, 0, 1}, 4000, options) |> dbg()
+    :ssl.connect({127, 0, 0, 1}, 4444, options) |> dbg
   end
 end
 
