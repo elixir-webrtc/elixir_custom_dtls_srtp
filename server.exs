@@ -5,7 +5,7 @@ defmodule CustomDTLSServer do
       log_level: :debug,
       protocol: :dtls,
       certs_keys: [
-        %{certfile: "cert.pm", keyfile: "key.pem"}
+        %{certfile: "cert.pem", keyfile: "key.pem"}
       ]
     ]
 
@@ -51,7 +51,7 @@ end
 
 :ssl.start()
 
-CustomDTLSServer.run()
+CustomDTLSServer.run() |> dbg()
 
 receive do
   :ok -> :ok
