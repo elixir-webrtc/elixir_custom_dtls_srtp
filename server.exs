@@ -6,9 +6,11 @@ defmodule CustomDTLSServer do
       protocol: :dtls,
       certs_keys: [
         %{certfile: "cert.pem", keyfile: "key.pem"}
-      ]
+      ],
+      use_srtp: %{protection_profiles: [<<0, 2>>, <<0, 5>>]}
     ]
 
+    # {:ok, socket} = :gen_udp.open(4444) # can't use plain UDP socket
     {:ok, socket} = :ssl.listen(4444, options)
     {:ok, socket} = :ssl.transport_accept(socket)
     :ssl.handshake(socket)

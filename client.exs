@@ -5,7 +5,8 @@ defmodule CustomDTLSClient do
       verify: :verify_none,
       log_level: :debug,
       protocol: :dtls,
-      cb_info: {CustomUDPTransport, :udp, :udp_closed, :udp_error}
+      cb_info: {CustomUDPTransport, :udp, :udp_closed, :udp_error},
+      use_srtp: %{protection_profiles: [<<0, 2>>, <<0, 5>>]}
     ]
 
     :ssl.connect({127, 0, 0, 1}, 4444, options)
